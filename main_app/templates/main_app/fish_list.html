@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Fish List</h1>
+
+{% for f in fish_list %}
+    <table>
+        <tr>
+            <td>{{ f.description }}</td>
+            <td>{{ f.color }}</td>
+            <td>
+                <form action="{% url 'fish_delete' f.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">X</button>
+                </form>
+            </td>
+        </tr>
+    {% empty %}
+        <h3>No Fishies Exist</he>
+    {% endfor %}
+     </table>
+     <a href="{% url 'fish_create' %}" class="pure-button">ADD FISH</a>
+
+{% endblock %}
